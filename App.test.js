@@ -1,33 +1,39 @@
 import React from 'react'
-import App from './App'
-//import renderer from 'react-test-renderer'
 import renderer from 'react-native-test-utils'
+import App from './App'
 
 describe('./App.js', () => {
   const app = renderer(<App />)
   const title = '[%] INANGLES'
-  const currentHour = '2'
-  const currentMinute = '30'
+  const d = new Date()
+  const currentHour = d.getHours().toString()
+  const currentMinute = d.getMinutes().toString()
+  // if (currentHour > 12)
 
   it('renders without crashing', () => {
     expect(app).toMatchSnapshot()
   })
-
   it('has the correct title', () => {
-    let appHeading = app.query('Text')
+    const appHeading = app.query('Text')
     expect(appHeading.text()).toEqual(title)
   })
 
   describe('Hour Input', () => {
+    it('has the correct initial state', () => {
+      expect(app.state().currentHour).toEqual(currentHour)
+    })
     it('displays current hour as placeholder', () => {
-      let textInputView = app.query("TextInput[placeholder='2']")
+      const textInputView = app.query(`TextInput[placeholder='${currentHour}']`)
       textInputView.simulate('changeText', 'react-native-test-utils')
     })
   })
 
   describe('Minute Input', () => {
+    it('has the correct initial state', () => {
+      expect(app.state().currentMinute).toEqual(currentMinute)
+    })
     it('displays current minute as placeholder', () => {
-      let textInputView = app.query("TextInput[placeholder='30']")
+      const textInputView = app.query(`TextInput[placeholder='${currentMinute}']`)
       textInputView.simulate('changeText', 'react-native-test-utils')
     })
   })

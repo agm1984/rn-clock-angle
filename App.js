@@ -1,48 +1,6 @@
 import React, { Component } from 'react'
-import {
-  View, Text, TextInput, StyleSheet,
-} from 'react-native'
+import { View, Text, TextInput, StyleSheet } from 'react-native'
 import Clock from './src/components/Clock/Clock'
-
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      currentHour: '2',
-      currentMinute: '30',
-    }
-  }
-
-  render() {
-    const { currentHour, currentMinute } = this.state
-    return (
-      <View style={styles.appWrapper}>
-        <View style={styles.appContainer}>
-          <Text style={styles.appHeading}>
-            [%] INANGLES
-          </Text>
-          <View style={styles.currentTimeWrapper}>
-            <TextInput
-              style={styles.hoursInput}
-              placeholder={currentHourz}
-              onChangeText={currentHour => this.setState({ currentHour })}
-              value=""
-            />
-            <TextInput
-              style={styles.minuteInput}
-              placeholder={currentMinute}
-              onChangeText={currentMinute => this.setState({ currentMinute })}
-              value=""
-            />
-          </View>
-          <Clock
-            minuteHandLength={110}
-          />
-        </View>
-      </View>
-    )
-  }
-}
 
 const styles = StyleSheet.create({
   appWrapper: {
@@ -81,7 +39,72 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     margin: 10,
-  }
+  },
 })
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+    const d = new Date()
+    // this.state = {
+    //   sec: d.getSeconds() * 6,
+    //   min: d.getMinutes() * 6 + (d.getSeconds() * 6) / 60,
+    //   hour: ((d.getHours() % 12)/ 12) * 360 + 90 +
+    //     (d.getMinutes() * 6 + (d.getSeconds() * 6) / 60) / 12,
+    // }
+    this.state = {
+      currentHour: d.getHours().toString(),
+      currentMinute: d.getMinutes().toString(),
+    }
+  }
+
+  render() {
+    const { currentHour, currentMinute } = this.state
+    return (
+      <View style={styles.appWrapper}>
+        <View style={styles.appContainer}>
+          <Text style={styles.appHeading}>
+            [%] INANGLES
+          </Text>
+          <View style={styles.currentTimeWrapper}>
+            <TextInput
+              style={styles.hoursInput}
+              placeholder={currentHour}
+              onChangeText={text => this.setState({ currentHour: text })}
+              value=""
+            />
+            <TextInput
+              style={styles.minuteInput}
+              placeholder={currentMinute}
+              onChangeText={text => this.setState({ currentMinute: text })}
+              value=""
+            />
+          </View>
+          <Clock
+            clockSize={270}
+            clockBorderWidth={7}
+            clockCentreSize={15}
+            clockCentreColor="black"
+            hourHandColor="black"
+            hourHandCurved
+            hourHandLength={70}
+            hourHandWidth={5.5}
+            hourHandOffset={0}
+            minuteHandColor="black"
+            minuteHandCurved
+            minuteHandLength={110}
+            minuteHandWidth={5}
+            minuteHandOffset={0}
+            secondHandColor="black"
+            secondHandCurved
+            secondHandLength={120}
+            secondHandWidth={2}
+            secondHandOffset={0}
+          />
+        </View>
+      </View>
+    )
+  }
+}
 
 export default App

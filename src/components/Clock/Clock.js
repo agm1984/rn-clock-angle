@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native'
 class Clock extends Component {
   constructor(props) {
     super(props)
-    let d = new Date()
+    const d = new Date()
     this.state = {
       sec: d.getSeconds() * 6,
       min: d.getMinutes() * 6 + (d.getSeconds() * 6) / 60,

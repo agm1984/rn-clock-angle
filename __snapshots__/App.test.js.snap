@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`./App.js renders without crashing 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "stretch",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "backgroundColor": "#000",
+          "color": "#fff",
+          "fontSize": 32,
+          "textAlign": "center",
+        }
+      }
+    >
+      [%] INANGLES
+    </Text>
+    <View
+      style={
+        Object {
+          "backgroundColor": "brown",
+          "flex": 0,
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        placeholder="2"
+        style={
+          Object {
+            "borderColor": "gray",
+            "borderWidth": 1,
+            "height": 40,
+            "margin": 10,
+            "padding": 10,
+            "textAlign": "center",
+          }
+        }
+        value=""
+      />
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        placeholder="30"
+        style={
+          Object {
+            "borderColor": "gray",
+            "borderWidth": 1,
+            "height": 40,
+            "margin": 10,
+            "padding": 10,
+            "textAlign": "center",
+          }
+        }
+        value=""
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "orange",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#eee",
+            "borderColor": "black",
+            "borderRadius": 135,
+            "borderWidth": 7,
+            "height": 270,
+            "position": "relative",
+            "width": 270,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "bottom": -7,
+              "height": 270,
+              "position": "absolute",
+              "right": -7,
+              "width": 270,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "black",
+                  "borderBottomLeftRadius": 5.5,
+                  "borderTopLeftRadius": 5.5,
+                  "height": 0,
+                  "left": 135,
+                  "marginLeft": -35,
+                  "marginVertical": -5.5,
+                  "paddingLeft": 70,
+                  "paddingVertical": 5.5,
+                  "position": "absolute",
+                  "top": 135,
+                  "width": 0,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "112.75833333333334deg",
+                    },
+                    Object {
+                      "translateX": -35,
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "black",
+                  "borderTopLeftRadius": 5,
+                  "borderTopRightRadius": 5,
+                  "height": 0,
+                  "left": 135,
+                  "marginHorizontal": -5,
+                  "marginTop": -55,
+                  "paddingHorizontal": 5,
+                  "paddingTop": 110,
+                  "position": "absolute",
+                  "top": 135,
+                  "width": 0,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "273.1deg",
+                    },
+                    Object {
+                      "translateY": -55,
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "black",
+                  "borderTopLeftRadius": 2,
+                  "borderTopRightRadius": 2,
+                  "height": 0,
+                  "left": 135,
+                  "marginHorizontal": -2,
+                  "marginTop": -60,
+                  "paddingHorizontal": 2,
+                  "paddingTop": 120,
+                  "position": "absolute",
+                  "top": 135,
+                  "width": 0,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "186deg",
+                    },
+                    Object {
+                      "translateY": -60,
+                    },
+                  ],
+                },
+              ]
+            }
+          />
+          <View
+            style={
+              Object {
+                "backgroundColor": "black",
+                "borderRadius": 7.5,
+                "height": 15,
+                "left": 127.5,
+                "top": 127.5,
+                "width": 15,
+              }
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

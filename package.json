@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "react-native-scripts": "1.14.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.4.4",
     "jest-expo": "~27.0.0",
+    "react-native-scripts": "1.14.0",
+    "react-native-test-utils": "^1.2.0",
     "react-test-renderer": "16.3.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
@@ -13,10 +17,11 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "node_modules/.bin/jest"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "verbose": true
   },
   "dependencies": {
     "expo": "^27.0.1",

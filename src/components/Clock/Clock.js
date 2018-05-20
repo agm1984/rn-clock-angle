@@ -10,116 +10,82 @@ const styles = StyleSheet.create({
 })
 
 class Clock extends Component {
-  constructor(props) {
-    super(props)
-    const d = new Date()
-    this.state = {
-      sec: d.getSeconds() * 6, /* eslint-disable no-mixed-operators */
-      min: d.getMinutes() * 6 + (d.getSeconds() * 6) / 60,
-      hour: ((d.getHours() % 12) / 12) * 360 + 90 +
-        (d.getMinutes() * 6 + (d.getSeconds() * 6) / 60) / 12,
-    } /* eslint-enable no-mixed-operators */
-  }
+  setHour = () => ((((+this.props.hour % 12) / 12) * 360) + 90 +
+    (((+this.props.min * 6) + ((+this.props.sec * 6) / 60)) / 12))
+  setMinute = () => ((+this.props.min * 6) + ((+this.props.sec * 6) / 60))
+  setSecond = () => (+this.props.sec * 6)
 
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      const d = new Date()
-      this.setState({ sec: d.getSeconds() * 6 }) /* eslint-disable no-mixed-operators */
-      this.setState({ min: d.getMinutes() * 6 + (d.getSeconds() * 6) / 60 })
-      this.setState({
-        hour: ((d.getHours() % 12) / 12) * 360 + 90 +
-        (d.getMinutes() * 6 + (d.getSeconds() * 6) / 60) / 12,
-      })
-    }, 1000) /* eslint-enable no-mixed-operators */
-  }
+  clockFrame = () => ({
+    width: this.props.clockSize,
+    height: this.props.clockSize,
+    position: 'relative',
+    backgroundColor: '#eee',
+    borderColor: 'black',
+    borderWidth: this.props.clockBorderWidth,
+    borderRadius: this.props.clockSize / 2,
+  })
 
-  componentWillUnmount() {
-    clearInterval(this.timer)
-  }
+  clockHolder = () => ({
+    width: this.props.clockSize,
+    height: this.props.clockSize,
+    position: 'absolute',
+    right: -this.props.clockBorderWidth,
+    bottom: -this.props.clockBorderWidth,
+  })
 
-  clockFrame() {
-    return {
-      width: this.props.clockSize,
-      height: this.props.clockSize,
-      position: 'relative',
-      backgroundColor: '#eee',
-      borderColor: 'black',
-      borderWidth: this.props.clockBorderWidth,
-      borderRadius: this.props.clockSize / 2,
-    }
-  }
+  clockFace = () => ({
+    width: this.props.clockCentreSize,
+    height: this.props.clockCentreSize,
+    backgroundColor: this.props.clockCentreColor,
+    borderRadius: this.props.clockCentreSize / 2,
+    top: (this.props.clockSize - this.props.clockCentreSize) / 2,
+    left: (this.props.clockSize - this.props.clockCentreSize) / 2,
+  })
 
-  clockHolder() {
-    return {
-      width: this.props.clockSize,
-      height: this.props.clockSize,
-      position: 'absolute',
-      right: -this.props.clockBorderWidth,
-      bottom: -this.props.clockBorderWidth,
-    }
-  }
+  hourHandStyles = () => ({
+    width: 0,
+    height: 0,
+    position: 'absolute',
+    backgroundColor: this.props.hourHandColor,
+    top: this.props.clockSize / 2,
+    left: this.props.clockSize / 2,
+    marginVertical: -this.props.hourHandWidth,
+    marginLeft: -this.props.hourHandLength / 2,
+    paddingVertical: this.props.hourHandWidth,
+    paddingLeft: this.props.hourHandLength,
+    borderTopLeftRadius: this.props.hourHandCurved ? this.props.hourHandWidth : 0,
+    borderBottomLeftRadius: this.props.hourHandCurved ? this.props.hourHandWidth : 0,
+  })
 
-  clockFace() {
-    return {
-      width: this.props.clockCentreSize,
-      height: this.props.clockCentreSize,
-      backgroundColor: this.props.clockCentreColor,
-      borderRadius: this.props.clockCentreSize / 2,
-      top: (this.props.clockSize - this.props.clockCentreSize) / 2,
-      left: (this.props.clockSize - this.props.clockCentreSize) / 2,
-    }
-  }
+  minuteHandStyles = () => ({
+    width: 0,
+    height: 0,
+    position: 'absolute',
+    backgroundColor: this.props.minuteHandColor,
+    top: this.props.clockSize / 2,
+    left: this.props.clockSize / 2,
+    marginTop: -(this.props.minuteHandLength / 2),
+    marginHorizontal: -this.props.minuteHandWidth,
+    paddingTop: this.props.minuteHandLength,
+    paddingHorizontal: this.props.minuteHandWidth,
+    borderTopLeftRadius: this.props.minuteHandCurved ? this.props.minuteHandWidth : 0,
+    borderTopRightRadius: this.props.minuteHandCurved ? this.props.minuteHandWidth : 0,
+  })
 
-  hourHandStyles() {
-    return {
-      width: 0,
-      height: 0,
-      position: 'absolute',
-      backgroundColor: this.props.hourHandColor,
-      top: this.props.clockSize / 2,
-      left: this.props.clockSize / 2,
-      marginVertical: -this.props.hourHandWidth,
-      marginLeft: -this.props.hourHandLength / 2,
-      paddingVertical: this.props.hourHandWidth,
-      paddingLeft: this.props.hourHandLength,
-      borderTopLeftRadius: this.props.hourHandCurved ? this.props.hourHandWidth : 0,
-      borderBottomLeftRadius: this.props.hourHandCurved ? this.props.hourHandWidth : 0,
-    }
-  }
-
-  minuteHandStyles() {
-    return {
-      width: 0,
-      height: 0,
-      position: 'absolute',
-      backgroundColor: this.props.minuteHandColor,
-      top: this.props.clockSize / 2,
-      left: this.props.clockSize / 2,
-      marginTop: -(this.props.minuteHandLength / 2),
-      marginHorizontal: -this.props.minuteHandWidth,
-      paddingTop: this.props.minuteHandLength,
-      paddingHorizontal: this.props.minuteHandWidth,
-      borderTopLeftRadius: this.props.minuteHandCurved ? this.props.minuteHandWidth : 0,
-      borderTopRightRadius: this.props.minuteHandCurved ? this.props.minuteHandWidth : 0,
-    }
-  }
-
-  secondHandStyles() {
-    return {
-      width: 0,
-      height: 0,
-      position: 'absolute',
-      backgroundColor: this.props.secondHandColor,
-      top: this.props.clockSize / 2,
-      left: this.props.clockSize / 2,
-      marginTop: -(this.props.secondHandLength / 2),
-      marginHorizontal: -this.props.secondHandWidth,
-      paddingTop: this.props.secondHandLength,
-      paddingHorizontal: this.props.secondHandWidth,
-      borderTopLeftRadius: this.props.secondHandCurved ? this.props.secondHandWidth : 0,
-      borderTopRightRadius: this.props.secondHandCurved ? this.props.secondHandWidth : 0,
-    }
-  }
+  secondHandStyles = () => ({
+    width: 0,
+    height: 0,
+    position: 'absolute',
+    backgroundColor: this.props.secondHandColor,
+    top: this.props.clockSize / 2,
+    left: this.props.clockSize / 2,
+    marginTop: -(this.props.secondHandLength / 2),
+    marginHorizontal: -this.props.secondHandWidth,
+    paddingTop: this.props.secondHandLength,
+    paddingHorizontal: this.props.secondHandWidth,
+    borderTopLeftRadius: this.props.secondHandCurved ? this.props.secondHandWidth : 0,
+    borderTopRightRadius: this.props.secondHandCurved ? this.props.secondHandWidth : 0,
+  })
 
   render() {
     return (
@@ -131,7 +97,7 @@ class Clock extends Component {
                 this.hourHandStyles(),
                 {
                   transform: [
-                    { rotate: `${this.state.hour}deg` },
+                    { rotate: `${this.setHour()}deg` },
                     { translateX: -(this.props.hourHandOffset + (this.props.hourHandLength / 2)) },
                   ],
                 },
@@ -142,7 +108,7 @@ class Clock extends Component {
                 this.minuteHandStyles(),
                 {
                   transform: [
-                    { rotate: `${this.state.min}deg` }, /* eslint-disable max-len */
+                    { rotate: `${this.setMinute()}deg` }, /* eslint-disable max-len */
                     { translateY: -(this.props.minuteHandOffset + (this.props.minuteHandLength / 2)) },
                   ], /* eslint-enable max-len */
                 },
@@ -153,7 +119,7 @@ class Clock extends Component {
                 this.secondHandStyles(),
                 {
                   transform: [
-                    { rotate: `${this.state.sec}` }, /* eslint-disable max-len */
+                    { rotate: `${this.setSecond()}deg` }, /* eslint-disable max-len */
                     { translateY: -(this.props.secondHandOffset + (this.props.secondHandLength / 2)) },
                   ], /* eslint-enable max-len */
                 },
@@ -168,6 +134,9 @@ class Clock extends Component {
 }
 
 Clock.propTypes = {
+  hour: PropTypes.number.isRequired,
+  min: PropTypes.number.isRequired,
+  sec: PropTypes.number.isRequired,
   clockSize: PropTypes.number.isRequired,
   clockBorderWidth: PropTypes.number.isRequired,
   clockCentreSize: PropTypes.number.isRequired,

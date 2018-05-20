@@ -82,6 +82,9 @@ class App extends Component {
             />
           </View>
           <Clock
+            hour={0}
+            min={0}
+            sec={0}
             clockSize={270}
             clockBorderWidth={7}
             clockCentreSize={15}

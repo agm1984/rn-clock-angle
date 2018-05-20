@@ -4,16 +4,15 @@ import { View, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   clockContainer: {
-    backgroundColor: 'orange',
     alignItems: 'center',
   },
 })
 
 class Clock extends Component {
-  setHour = () => ((((+this.props.hour % 12) / 12) * 360) + 90 +
-    (((+this.props.min * 6) + ((+this.props.sec * 6) / 60)) / 12))
-  setMinute = () => ((+this.props.min * 6) + ((+this.props.sec * 6) / 60))
-  setSecond = () => (+this.props.sec * 6)
+  setHour = () => ((((this.props.hour % 12) / 12) * 360) + 90 +
+    (((this.props.min * 6) + ((this.props.sec * 6) / 60)) / 12))
+  setMinute = () => ((this.props.min * 6) + ((this.props.sec * 6) / 60))
+  setSecond = () => (this.props.sec * 6)
 
   clockFrame = () => ({
     width: this.props.clockSize,

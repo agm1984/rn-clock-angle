@@ -20,5 +20,13 @@ rotate(angle+"deg")
 
 ### Clock angle formula
 ```
-TBD
+m * 6 - (h * 30 + m * 0.5)
 ```
+
+#### Coterminal
+```
+360 - (m * 6 - (h * 30 + m * 0.5))
+```
+
+### Degrees to Radians
+

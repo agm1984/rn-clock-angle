@@ -1,112 +1,144 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import {
+  SafeAreaView, View, Image, Text,
+  TextInput, Switch,
+} from 'react-native'
+import styles from './App.styles'
 import Clock from './src/components/Clock/Clock'
+import { calcHour, calcMinute, calcAMPM } from './src/utils/timeUtils'
+import { calcDegrees } from './src/utils/angleUtils'
 
-const styles = StyleSheet.create({
-  appWrapper: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  appContainer: {
-    alignItems: 'stretch',
-  },
-  appHeading: {
-    backgroundColor: '#000',
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 32,
-  },
-  currentTimeWrapper: {
-    flex: 0,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: 'brown',
-  },
-  hoursInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    textAlign: 'center',
-    padding: 10,
-    margin: 10,
-  },
-  minuteInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    textAlign: 'center',
-    padding: 10,
-    margin: 10,
-  },
-})
+
+export const defaultClockSettings = {
+  hour: 0,
+  min: 0,
+  sec: 0,
+  clockSize: 200,
+  clockBorderWidth: 4,
+  clockCentreSize: 15,
+  clockCentreColor: 'black',
+  hourHandColor: 'black',
+  hourHandWidth: 4.5,
+  hourHandLength: 60,
+  hourHandCurved: true,
+  hourHandOffset: 0,
+  minuteHandColor: 'black',
+  minuteHandLength: 80,
+  minuteHandWidth: 4,
+  minuteHandCurved: true,
+  minuteHandOffset: 0,
+  secondHandColor: 'black',
+  secondHandLength: 90,
+  secondHandWidth: 2,
+  secondHandCurved: true,
+  secondHandOffset: 0,
+}
 
 class App extends Component {
   constructor(props) {
     super(props)
-    const d = new Date()
-    // this.state = {
-    //   sec: d.getSeconds() * 6,
-    //   min: d.getMinutes() * 6 + (d.getSeconds() * 6) / 60,
-    //   hour: ((d.getHours() % 12)/ 12) * 360 + 90 +
-    //     (d.getMinutes() * 6 + (d.getSeconds() * 6) / 60) / 12,
-    // }
     this.state = {
-      currentHour: d.getHours().toString(),
-      currentMinute: d.getMinutes().toString(),
-      primaryColor: 'black',
+      currentHour: 2,
+      currentMinute: 30,
+      currentSecond: 0,
+      isClockControlled: false,
+      isAfternoon: true,
     }
+    this.clockTimer = null
   }
 
+  componentDidMount() {
+    this.clockTimer = setInterval(() => {
+      const d = new Date()
+      return this.setState({
+        currentHour: d.getHours(),
+        currentMinute: d.getMinutes(),
+        currentSecond: d.getSeconds(),
+      })
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.clockTimer)
+  }
+
+  toggleAfternoon = () => this.setState(prevState => ({
+    isAfternoon: !prevState.isAfternoon,
+  }))
+
   render() {
-    const { currentHour, currentMinute, primaryColor } = this.state
+    const {
+      currentHour, currentMinute, currentSecond, isAfternoon,
+    } = this.state
     return (
-      <View style={styles.appWrapper}>
-        <View style={styles.appContainer}>
-          <Text style={styles.appHeading}>
-            [%] INANGLES
-          </Text>
-          <View style={styles.currentTimeWrapper}>
-            <TextInput
-              style={styles.hoursInput}
-              placeholder={currentHour}
-              onChangeText={text => this.setState({ currentHour: text })}
-              value=""
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.appWrapper}>
+          <View style={styles.appContainer}>
+            <View style={styles.clockControlContainer}>
+              <Text>test</Text>
+            </View>
+            <View style={styles.headingContainer}>
+              <Image
+                style={styles.headingLogo}
+                source={require('./src/images/mockLogo.jpg')}
+              />
+              <Text testID="headingText" style={styles.headingText}>
+                INANGLES
+              </Text>
+            </View>
+            <View style={styles.subheadingContainer}>
+              <Text style={styles.subheadingText}>TIME</Text>
+              <View style={styles.subheadingUnderline} />
+            </View>
+            <View style={styles.timeContainer}>
+              <TextInput
+                style={styles.hoursInput}
+                placeholder={calcHour(currentHour).toString()}
+                onChangeText={text => this.setState({ currentHour: +text })}
+                value={calcHour(currentHour).toString()}
+                underlineColorAndroid="transparent"
+              />
+              <Text>:</Text>
+              <TextInput
+                style={styles.minuteInput}
+                placeholder={calcMinute(currentMinute).toString()}
+                onChangeText={text => this.setState({ currentMinute: +text })}
+                value={calcMinute(currentMinute).toString()}
+                underlineColorAndroid="transparent"
+              />
+              <View style={styles.isAfternoonContainer}>
+                <Text>
+                  {calcAMPM(currentHour)}
+                </Text>
+                {this.state.isClockControlled && (
+                  <Switch
+                    onValueChange={() => this.toggleAfternoon()}
+                    thumbTintColor="#278eca"
+                    tintColor="#eef"
+                    onTintColor="#eef"
+                    value={isAfternoon}
+                  />
+                )}
+              </View>
+            </View>
+            <Clock
+              {...defaultClockSettings}
+              hour={currentHour}
+              min={currentMinute}
+              sec={currentSecond}
             />
-            <TextInput
-              style={styles.minuteInput}
-              placeholder={currentMinute}
-              onChangeText={text => this.setState({ currentMinute: text })}
-              value=""
-            />
+            <View style={styles.subheadingContainer}>
+              <Text style={styles.subheadingText}>ANGLE</Text>
+              <View style={styles.subheadingUnderline} />
+            </View>
+            <View>
+              <Text>
+                {calcDegrees(calcHour(currentHour), calcMinute(currentMinute)).degrees} Degrees
+              </Text>
+            </View>
           </View>
-          <Clock
-            hour={0}
-            min={0}
-            sec={0}
-            clockSize={270}
-            clockBorderWidth={7}
-            clockCentreSize={15}
-            clockCentreColor={primaryColor}
-            hourHandColor={primaryColor}
-            hourHandWidth={5.5}
-            hourHandLength={70}
-            hourHandCurved
-            hourHandOffset={0}
-            minuteHandColor={primaryColor}
-            minuteHandLength={110}
-            minuteHandWidth={5}
-            minuteHandCurved
-            minuteHandOffset={0}
-            secondHandColor={primaryColor}
-            secondHandLength={120}
-            secondHandWidth={2}
-            secondHandCurved
-            secondHandOffset={0}
-          />
         </View>
-      </View>
+      </SafeAreaView>
     )
   }
 }

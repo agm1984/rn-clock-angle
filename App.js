@@ -13,22 +13,24 @@ export const defaultClockSettings = {
   hour: 0,
   min: 0,
   sec: 0,
-  clockSize: 200,
+  clockSize: 150,
+  clockColor: '#333',
+  clockBorderColor: '#333',
   clockBorderWidth: 4,
-  clockCentreSize: 15,
-  clockCentreColor: 'black',
-  hourHandColor: 'black',
-  hourHandWidth: 4.5,
-  hourHandLength: 60,
+  clockCentreSize: 10,
+  clockCentreColor: '#278eca',
+  hourHandColor: '#fff',
+  hourHandWidth: 3.5,
+  hourHandLength: 45,
   hourHandCurved: true,
   hourHandOffset: 0,
-  minuteHandColor: 'black',
-  minuteHandLength: 80,
-  minuteHandWidth: 4,
+  minuteHandColor: '#fff',
+  minuteHandLength: 55,
+  minuteHandWidth: 3,
   minuteHandCurved: true,
   minuteHandOffset: 0,
-  secondHandColor: 'black',
-  secondHandLength: 90,
+  secondHandColor: '#278eca',
+  secondHandLength: 65,
   secondHandWidth: 2,
   secondHandCurved: true,
   secondHandOffset: 0,
@@ -77,6 +79,7 @@ class App extends Component {
             <View style={styles.clockControlContainer}>
               <Text>test</Text>
             </View>
+
             <View style={styles.headingContainer}>
               <Image
                 style={styles.headingLogo}
@@ -90,9 +93,11 @@ class App extends Component {
               <Text style={styles.subheadingText}>TIME</Text>
               <View style={styles.subheadingUnderline} />
             </View>
+
             <View style={styles.timeContainer}>
               <TextInput
                 style={styles.hoursInput}
+                placeholderTextColor="#757575"
                 placeholder={calcHour(currentHour).toString()}
                 onChangeText={text => this.setState({ currentHour: +text })}
                 value={calcHour(currentHour).toString()}
@@ -101,6 +106,7 @@ class App extends Component {
               <Text>:</Text>
               <TextInput
                 style={styles.minuteInput}
+                placeholderTextColor="#757575"
                 placeholder={calcMinute(currentMinute).toString()}
                 onChangeText={text => this.setState({ currentMinute: +text })}
                 value={calcMinute(currentMinute).toString()}
@@ -121,21 +127,32 @@ class App extends Component {
                 )}
               </View>
             </View>
+
             <Clock
               {...defaultClockSettings}
               hour={currentHour}
               min={currentMinute}
               sec={currentSecond}
             />
-            <View style={styles.subheadingContainer}>
-              <Text style={styles.subheadingText}>ANGLE</Text>
-              <View style={styles.subheadingUnderline} />
+
+            <View style={styles.grayheadingContainer}>
+              <Text style={styles.grayheadingText}>ANGLE</Text>
             </View>
-            <View>
-              <Text>
-                {calcDegrees(calcHour(currentHour), calcMinute(currentMinute)).degrees} Degrees
+            <View style={styles.secondaryTextContainer}>
+              <Text style={styles.secondaryText}>
+                {calcDegrees(calcHour(currentHour), calcMinute(currentMinute)).degrees} Degrees is the angle between the Hour and Minute Hands.
               </Text>
             </View>
+
+            <View style={styles.grayheadingContainer}>
+              <Text style={styles.grayheadingText}>COTERMINAL ANGLE</Text>
+            </View>
+            <View style={styles.secondaryTextContainer}>
+              <Text style={styles.secondaryText}>
+                {calcDegrees(calcHour(currentHour), calcMinute(currentMinute)).coterminal} Degrees is the coterminal angle between the Hour and Minute Hands. Other coterminal angles are excluded.
+              </Text>
+            </View>
+
           </View>
         </View>
       </SafeAreaView>

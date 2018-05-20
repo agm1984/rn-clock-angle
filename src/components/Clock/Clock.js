@@ -5,6 +5,9 @@ import { View, StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   clockContainer: {
     alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingTop: 16,
+    paddingBottom: 24,
   },
 })
 
@@ -18,8 +21,8 @@ class Clock extends Component {
     width: this.props.clockSize,
     height: this.props.clockSize,
     position: 'relative',
-    backgroundColor: '#eee',
-    borderColor: 'black',
+    backgroundColor: this.props.clockColor,
+    borderColor: this.props.clockBorderColor,
     borderWidth: this.props.clockBorderWidth,
     borderRadius: this.props.clockSize / 2,
   })
@@ -137,6 +140,8 @@ Clock.propTypes = {
   min: PropTypes.number.isRequired,
   sec: PropTypes.number.isRequired,
   clockSize: PropTypes.number.isRequired,
+  clockColor: PropTypes.string.isRequired,
+  clockBorderColor: PropTypes.string.isRequired,
   clockBorderWidth: PropTypes.number.isRequired,
   clockCentreSize: PropTypes.number.isRequired,
   clockCentreColor: PropTypes.string.isRequired,

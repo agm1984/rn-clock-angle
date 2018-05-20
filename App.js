@@ -55,11 +55,12 @@ class App extends Component {
     this.state = {
       currentHour: d.getHours().toString(),
       currentMinute: d.getMinutes().toString(),
+      primaryColor: 'black',
     }
   }
 
   render() {
-    const { currentHour, currentMinute } = this.state
+    const { currentHour, currentMinute, primaryColor } = this.state
     return (
       <View style={styles.appWrapper}>
         <View style={styles.appContainer}>
@@ -84,21 +85,21 @@ class App extends Component {
             clockSize={270}
             clockBorderWidth={7}
             clockCentreSize={15}
-            clockCentreColor="black"
-            hourHandColor="black"
-            hourHandCurved
-            hourHandLength={70}
+            clockCentreColor={primaryColor}
+            hourHandColor={primaryColor}
             hourHandWidth={5.5}
+            hourHandLength={70}
+            hourHandCurved
             hourHandOffset={0}
-            minuteHandColor="black"
-            minuteHandCurved
+            minuteHandColor={primaryColor}
             minuteHandLength={110}
             minuteHandWidth={5}
+            minuteHandCurved
             minuteHandOffset={0}
-            secondHandColor="black"
-            secondHandCurved
+            secondHandColor={primaryColor}
             secondHandLength={120}
             secondHandWidth={2}
+            secondHandCurved
             secondHandOffset={0}
           />
         </View>

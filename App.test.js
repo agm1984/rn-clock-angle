@@ -11,7 +11,7 @@ describe('./App.js', () => {
   // if (currentHour > 12)
 
   it('renders without crashing', () => {
-    expect(app).toMatchSnapshot()
+    expect(app).toBeTruthy()
   })
   it('has the correct title', () => {
     const appHeading = app.query('Text')

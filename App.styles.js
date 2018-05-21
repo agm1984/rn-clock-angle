@@ -19,11 +19,12 @@ export default StyleSheet.create({
   },
   clockControlContainer: {
     position: 'absolute',
-    top: 50,
-    // aright: 0,
-    // width: 10,
-    // height: 10,
-    backgroundColor: 'red',
+    top: 0,
+    right: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 14,
+    paddingRight: 16,
   },
   headingContainer: {
     flexDirection: 'row',
@@ -58,7 +59,7 @@ export default StyleSheet.create({
   subheadingUnderline: {
     backgroundColor: '#278eca',
     width: 32,
-    height: 3,
+    height: 2,
     marginTop: 8,
     marginBottom: 8,
     marginLeft: 16,
@@ -70,16 +71,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
-  hoursInput: {
-    height: 40,
-    backgroundColor: '#fff',
-    borderColor: '#ccc',
-    borderWidth: 2,
-    textAlign: 'center',
-    padding: 10,
-    margin: 10,
-  },
-  minuteInput: {
+  clockInput: {
     height: 40,
     backgroundColor: '#fff',
     borderColor: '#ccc',
@@ -91,6 +83,10 @@ export default StyleSheet.create({
   isAfternoonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  errorMessage: {
+    position: 'absolute',
+    bottom: 0,
   },
   degreeContainer: {
     backgroundColor: '#333',
@@ -114,10 +110,17 @@ export default StyleSheet.create({
   secondaryTextContainer: {
     backgroundColor: '#333',
     paddingTop: 8,
-    paddingLeft: 20,
+    paddingLeft: 16,
     paddingRight: 20,
   },
   secondaryText: {
     color: '#fff',
+    lineHeight: 20,
+  },
+  degreeText: {
+    color: '#278eca',
+    fontWeight: '900',
+    lineHeight: 20,
+    marginRight: 8,
   },
 })

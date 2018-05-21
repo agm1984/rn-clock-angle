@@ -1,6 +1,6 @@
 import { calcDegrees } from './angleUtils'
 
-describe('./src/angleUtils.js', () => {
+describe('Angle Utilities', () => {
   describe('calcDegrees()', () => {
     it('throws the correct error when nothing is passed in', () => {
       expect(() => calcDegrees()).toThrow('An hour must be specified from 1-12.')

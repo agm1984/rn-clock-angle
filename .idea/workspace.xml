@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2e6b9fa-8266-4d47-96e0-f876195d17ec" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/background.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App.js" afterPath="$PROJECT_DIR$/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App.test.js" afterPath="$PROJECT_DIR$/App.test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Clock/Clock.js" afterPath="$PROJECT_DIR$/src/components/Clock/Clock.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="rn-clock-angle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,22 +60,11 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rn-clock-angle" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rn-clock-angle" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
       <pane id="Scope" />
     </panes>
   </component>
@@ -173,7 +159,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />

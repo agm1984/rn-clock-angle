@@ -1,9 +1,9 @@
 import { calcHour, calcMinute, calcAMPM } from './timeUtils'
 
-describe('./src/timeUtils.js', () => {
+describe('Time Utilities', () => {
   describe('calcHour()', () => {
     it('throws the correct error when no hour is passed in', () => {
-      expect(() => calcHour()).toThrow('Hour must be specified from `new Date.getHours()`.')
+      expect(() => calcHour()).toThrow('calcHour(): Hour must be specified from `new Date.getHours()`.')
     })
     it('returns 12 when hour is midnight', () => {
       expect(calcHour(0)).toEqual(12)
@@ -18,7 +18,7 @@ describe('./src/timeUtils.js', () => {
 
   describe('calcMinute()', () => {
     it('throws the correct error when no minute is passed in', () => {
-      expect(() => calcMinute()).toThrow('Minute must be specified from `new Date.getMinutes()`.')
+      expect(() => calcMinute()).toThrow('calcMinute(): Minute must be specified from `new Date.getMinutes()`.')
     })
     it('returns 00 when minute of the hour is 0', () => {
       expect(calcMinute(0)).toEqual('00')
@@ -33,7 +33,10 @@ describe('./src/timeUtils.js', () => {
 
   describe('calcAMPM()', () => {
     it('throws the correct error when no hour is passed in', () => {
-      expect(() => calcAMPM()).toThrow('Hour must be specified from `new Date.getHours()`.')
+      expect(() => calcAMPM()).toThrow('calcAMPM(): Hour must be specified from `new Date.getHours()`.')
+    })
+    it('returns AM when hour is 0', () => {
+      expect(calcAMPM(0)).toEqual('AM')
     })
     it('returns AM when hour is less than 12', () => {
       expect(calcAMPM(11)).toEqual('AM')

@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, StyleSheet } from 'react-native'
-
-const styles = StyleSheet.create({
-  clockContainer: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingTop: 16,
-    paddingBottom: 24,
-  },
-})
+import { View } from 'react-native'
+import styles from './Clock.styles'
 
 class Clock extends Component {
+  /**
+   * setHour(), setMinute(), and setSecond() are Base 60
+   * ratios for Clock Hand rotation distance calculated in degrees.
+   * These should never require modification.
+   * See upstream DOM markup to examine props.
+   */
   setHour = () => ((((this.props.hour % 12) / 12) * 360) + 90 +
     (((this.props.min * 6) + ((this.props.sec * 6) / 60)) / 12))
   setMinute = () => ((this.props.min * 6) + ((this.props.sec * 6) / 60))
   setSecond = () => (this.props.sec * 6)
 
+  /**
+   * clockFrame(), clockHolder(), and clockFace() are calculated
+   * clock dimensions based on supplied props.
+   * See `defaultClockSettings`.
+   */
   clockFrame = () => ({
     width: this.props.clockSize,
     height: this.props.clockSize,
@@ -26,7 +29,6 @@ class Clock extends Component {
     borderWidth: this.props.clockBorderWidth,
     borderRadius: this.props.clockSize / 2,
   })
-
   clockHolder = () => ({
     width: this.props.clockSize,
     height: this.props.clockSize,
@@ -34,7 +36,6 @@ class Clock extends Component {
     right: -this.props.clockBorderWidth,
     bottom: -this.props.clockBorderWidth,
   })
-
   clockFace = () => ({
     width: this.props.clockCentreSize,
     height: this.props.clockCentreSize,
@@ -44,6 +45,11 @@ class Clock extends Component {
     left: (this.props.clockSize - this.props.clockCentreSize) / 2,
   })
 
+  /**
+   * hourHandStyles(), minuteHandStyles(), secondHandStyles()
+   * are calculated clock hand dimensions based on supplied props.
+   * See `defaultClockSettings`.
+   */
   hourHandStyles = () => ({
     width: 0,
     height: 0,
@@ -58,7 +64,6 @@ class Clock extends Component {
     borderTopLeftRadius: this.props.hourHandCurved ? this.props.hourHandWidth : 0,
     borderBottomLeftRadius: this.props.hourHandCurved ? this.props.hourHandWidth : 0,
   })
-
   minuteHandStyles = () => ({
     width: 0,
     height: 0,
@@ -73,7 +78,6 @@ class Clock extends Component {
     borderTopLeftRadius: this.props.minuteHandCurved ? this.props.minuteHandWidth : 0,
     borderTopRightRadius: this.props.minuteHandCurved ? this.props.minuteHandWidth : 0,
   })
-
   secondHandStyles = () => ({
     width: 0,
     height: 0,
@@ -89,44 +93,59 @@ class Clock extends Component {
     borderTopRightRadius: this.props.secondHandCurved ? this.props.secondHandWidth : 0,
   })
 
+  renderHourHand = () => {
+    const { hourHandOffset, hourHandLength } = this.props
+    return [
+      this.hourHandStyles(),
+      {
+        transform: [
+          { rotate: `${this.setHour()}deg` },
+          { translateX: -(hourHandOffset + (hourHandLength / 2)) },
+        ],
+      },
+    ]
+  }
+  renderMinuteHand = () => {
+    const { minuteHandOffset, minuteHandLength } = this.props
+    return [
+      this.minuteHandStyles(),
+      {
+        transform: [
+          { rotate: `${this.setMinute()}deg` },
+          { translateY: -(minuteHandOffset + (minuteHandLength / 2)) },
+        ],
+      },
+    ]
+  }
+  renderSecondHand = () => {
+    const { secondHandOffset, secondHandLength, isClockControlled } = this.props
+    if (isClockControlled) {
+      return { display: 'none' }
+    }
+    return [
+      this.secondHandStyles(),
+      {
+        transform: [
+          { rotate: `${this.setSecond()}deg` },
+          { translateY: -(secondHandOffset + (secondHandLength / 2)) },
+        ],
+      },
+    ]
+  }
+
+  /**
+   * Rotation origin for Clock hands is based on the center point of each hand,
+   * so each hand must be translated to pivot from its end point.
+   * See `defaultClockSettings` first for any dimensional changes.
+   */
   render() {
     return (
       <View style={styles.clockContainer}>
         <View style={this.clockFrame()}>
           <View style={this.clockHolder()}>
-            <View
-              style={[
-                this.hourHandStyles(),
-                {
-                  transform: [
-                    { rotate: `${this.setHour()}deg` },
-                    { translateX: -(this.props.hourHandOffset + (this.props.hourHandLength / 2)) },
-                  ],
-                },
-              ]}
-            />
-            <View
-              style={[
-                this.minuteHandStyles(),
-                {
-                  transform: [
-                    { rotate: `${this.setMinute()}deg` }, /* eslint-disable max-len */
-                    { translateY: -(this.props.minuteHandOffset + (this.props.minuteHandLength / 2)) },
-                  ], /* eslint-enable max-len */
-                },
-              ]}
-            />
-            <View
-              style={[
-                this.secondHandStyles(),
-                {
-                  transform: [
-                    { rotate: `${this.setSecond()}deg` }, /* eslint-disable max-len */
-                    { translateY: -(this.props.secondHandOffset + (this.props.secondHandLength / 2)) },
-                  ], /* eslint-enable max-len */
-                },
-              ]}
-            />
+            <View style={this.renderHourHand()} />
+            <View style={this.renderMinuteHand()} />
+            <View style={this.renderSecondHand()} />
             <View style={this.clockFace()} />
           </View>
         </View>
@@ -139,6 +158,7 @@ Clock.propTypes = {
   hour: PropTypes.number.isRequired,
   min: PropTypes.number.isRequired,
   sec: PropTypes.number.isRequired,
+  isClockControlled: PropTypes.bool.isRequired,
   clockSize: PropTypes.number.isRequired,
   clockColor: PropTypes.string.isRequired,
   clockBorderColor: PropTypes.string.isRequired,

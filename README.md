@@ -13,7 +13,7 @@ $ npm run android
 ```
 
 ## Test
-> This reop uses Jest `verbose: true` mode. See the package.json file to disable it.
+> This repo uses Jest `verbose: true` mode. See the package.json file to disable it.
 
 #### Standard
 ``` bash

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
-  SafeAreaView, View, Image, Text,
-  TextInput, Switch,
+  SafeAreaView, ScrollView, View, Image, Text,
+  Picker, Switch,
 } from 'react-native'
 import styles from './App.styles'
 import Clock from './src/components/Clock/Clock'
@@ -17,11 +17,8 @@ class App extends Component {
       currentHour: 0,
       currentMinute: 0,
       currentSecond: 0,
-      currentHourControlled: 2,
-      currentMinuteControlled: 30,
       isClockControlled: false,
       isAfternoon: true,
-      errorMessage: '',
     }
     this.clockTimer = null
   }
@@ -50,15 +47,15 @@ class App extends Component {
 
   /**
    * If the clock is currently user controlled, `isAfternoon`
-   * truthy is PM and falsy is AM.
+   * truthy is PM, and `isAfternoon` falsy is AM.
    */
   toggleAfternoon = () => this.setState(prevState => ({
     isAfternoon: !prevState.isAfternoon,
   }))
 
   /**
-   * When clock control is delegated to the user, the update
-   * timer should be disabled. When clock control is relinquished,
+   * When the clock is controlled by the user, the auto-update
+   * timer should be disabled. When the clock is uncontrolled,
    * the clock update timer should be re-enabled.
    */
   toggleClockControl = () => this.setState((prevState) => {
@@ -82,76 +79,63 @@ class App extends Component {
     return {
       currentHour: 0,
       currentMinute: 0,
+      currentSecond: 0,
       isClockControlled: false,
     }
   })
 
-  inputStyles = () => ([styles.clockInput, {
-    borderColor: this.state.isClockControlled ? '#ccc' : '#fff',
-    paddingLeft: this.state.isClockControlled ? 10 : 5,
-    paddingRight: this.state.isClockControlled ? 10 : 5,
-    marginLeft: this.state.isClockControlled ? 10 : 0,
-    marginRight: this.state.isClockControlled ? 10 : 0,
-  }])
 
-  handleHourChange = (hour) => {
-    if (this.state.isClockControlled) {
-      switch (true) {
-        case !hour:
-          return this.setState({
-            currentHourControlled: '',
-            errorMessage: 'Specify an hour between 1 and 12.',
-          })
-        case hour < 1:
-          return this.setState({
-            currentHourControlled: +hour,
-            errorMessage: 'Specify an hour between 1 and 12.',
-          })
-        case hour > 12:
-          return this.setState({
-            currentHourControlled: +hour,
-            errorMessage: 'Specify an hour between 1 and 12.',
-          })
-        default:
-          return this.setState({
-            currentHourControlled: +hour,
-            currentHour: +hour,
-            errorMessage: '',
-          })
-      }
-    }
-    return this.setState({ currentHour: +hour })
-  }
-
-  handleMinuteChange = (text) => {
-    if (this.state.isClockControlled) {
-      console.log('WTF', typeof text)
-      switch (true) {
-        case !text:
-          return this.setState({
-            currentMinuteControlled: '',
-            errorMessage: 'Specify an minute between 0 and 59.',
-          })
-        case +text < 0:
-          return this.setState({
-            currentMinuteControlled: +text,
-            errorMessage: 'Specify an minute between 0 and 59.',
-          })
-        case +text > 59:
-          return this.setState({
-            currentMinuteControlled: +text,
-            errorMessage: 'Specify an minute between 0 and 59.',
-          })
-        default:
-          return this.setState({
-            currentMinuteControlled: +text,
-            currentMinute: +text,
-            errorMessage: '',
-          })
-      }
-    }
-    return this.setState({ currentHour: +text })
-  }
+  /**
+   * Time is read-only in uncontrolled mode, and a Picker is used
+   * in controlled mode to allow custom display.
+   * Picker items are generated.
+   */
+  renderHour = () => (
+    <Text testID="currentHourDisplay" style={styles.timeDisplay}>
+      {calcHour(this.state.currentHour).toString()}
+    </Text>
+  )
+  renderHourPicker = () => (
+    <Picker
+      enabled
+      testID="hourPicker"
+      mode="dropdown"
+      style={styles.timePicker}
+      selectedValue={this.state.currentHour}
+      onValueChange={hour => this.setState({ currentHour: +hour })}
+    >
+      {Array.from(Array(12), (_, x) => x).map(hour => (
+        <Picker.Item
+          key={`hour${hour + 1}`}
+          label={`${hour + 1}`}
+          value={hour + 1}
+        />
+      ))}
+    </Picker>
+  )
+  renderMinute = () => (
+    <Text testID="currentMinuteDisplay" style={styles.timeDisplay}>
+      {calcMinute(this.state.currentMinute).toString()}
+    </Text>
+  )
+  renderMinutePicker = () => (
+    <Picker
+      enabled
+      testID="minutePicker"
+      mode="dropdown"
+      style={styles.timePicker}
+      selectedValue={calcMinute(this.state.currentMinute).toString()}
+      onValueChange={minute => this.setState({ currentMinute: +minute })}
+    >
+      {Array.from(Array(60), (_, x) => x).map(min => (
+        <Picker.Item
+          key={`minute${min}`}
+          label={(min < 10) ? `0${min}` : `${min}`}
+          value={(min < 10) ? `0${min}` : `${min}`}
+        />
+      ))}
+    </Picker>
+  )
 
   /**
    * If clock control is currently handled automatically, the
@@ -170,12 +154,11 @@ class App extends Component {
   render() {
     const {
       currentHour, currentMinute, currentSecond,
-      currentHourControlled, currentMinuteControlled,
       isClockControlled, isAfternoon, errorMessage,
     } = this.state
     return (
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.appWrapper}>
+        <ScrollView contentContainerStyle={styles.appWrapper}>
           <View style={styles.appContainer}>
             <View style={styles.headingContainer}>
               <Image
@@ -206,33 +189,13 @@ class App extends Component {
             </View>
 
             <View style={styles.timeContainer}>
-              <TextInput
-                testID="hourInput"
-                style={this.inputStyles()}
-                placeholderTextColor="#757575"
-                placeholder={(isClockControlled === true)
-                  ? currentHourControlled.toString()
-                  : calcHour(currentHour).toString()}
-                onChangeText={text => this.handleHourChange(text)}
-                value={(isClockControlled === true)
-                  ? currentHourControlled.toString()
-                  : calcHour(currentHour).toString()}
-                underlineColorAndroid="transparent"
-              />
+              {(isClockControlled === true)
+                ? this.renderHourPicker()
+                : this.renderHour()}
               <Text>:</Text>
-              <TextInput
-                testID="minuteInput"
-                style={this.inputStyles()}
-                placeholderTextColor="#757575"
-                placeholder={(isClockControlled === true)
-                  ? currentMinuteControlled.toString()
-                  : calcMinute(currentMinute).toString()}
-                onChangeText={text => this.handleMinuteChange(text)}
-                value={(isClockControlled === true)
-                  ? (currentMinuteControlled === '') ? '' : calcMinute(currentMinuteControlled).toString()
-                  : calcMinute(currentMinute).toString()}
-                underlineColorAndroid="transparent"
-              />
+              {(isClockControlled === true)
+                ? this.renderMinutePicker()
+                : this.renderMinute()}
               <View style={styles.isAfternoonContainer}>
                 <Text>
                   {this.renderAMPM()}
@@ -291,7 +254,7 @@ class App extends Component {
             </View>
 
           </View>
-        </View>
+        </ScrollView>
       </SafeAreaView>
     )
   }

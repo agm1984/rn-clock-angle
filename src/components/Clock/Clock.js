@@ -93,6 +93,11 @@ class Clock extends Component {
     borderTopRightRadius: this.props.secondHandCurved ? this.props.secondHandWidth : 0,
   })
 
+  /**
+   * Clock hands are rotated from the center point and then translated
+   * to the calculated position for endpoint pivoting (center of clock).
+   * See `defaultClockSettings` first for any dimensional changes.
+   */
   renderHourHand = () => {
     const { hourHandOffset, hourHandLength } = this.props
     return [
@@ -119,9 +124,7 @@ class Clock extends Component {
   }
   renderSecondHand = () => {
     const { secondHandOffset, secondHandLength, isClockControlled } = this.props
-    if (isClockControlled) {
-      return { display: 'none' }
-    }
+    if (isClockControlled) return { display: 'none' }
     return [
       this.secondHandStyles(),
       {
@@ -133,11 +136,6 @@ class Clock extends Component {
     ]
   }
 
-  /**
-   * Rotation origin for Clock hands is based on the center point of each hand,
-   * so each hand must be translated to pivot from its end point.
-   * See `defaultClockSettings` first for any dimensional changes.
-   */
   render() {
     return (
       <View style={styles.clockContainer}>

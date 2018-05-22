@@ -6,7 +6,7 @@ export default StyleSheet.create({
     backgroundColor: '#000',
   },
   appWrapper: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#000',
     alignItems: 'stretch',
     paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight,
@@ -16,6 +16,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     backgroundColor: '#333',
+    paddingBottom: 16,
   },
   clockControlContainer: {
     position: 'absolute',
@@ -71,14 +72,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
-  clockInput: {
+  timeDisplay: {
+    padding: 4,
+  },
+  timePicker: {
+    width: 60,
     height: 40,
-    backgroundColor: '#fff',
     borderColor: '#ccc',
     borderWidth: 2,
-    textAlign: 'center',
-    padding: 10,
-    margin: 10,
   },
   isAfternoonContainer: {
     flexDirection: 'row',

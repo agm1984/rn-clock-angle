@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1526953046314" clover="3.2.0">
-  <project timestamp="1526953046315" name="All files">
+<coverage generated="1526968719519" clover="3.2.0">
+  <project timestamp="1526968719519" name="All files">
     <metrics statements="81" coveredstatements="72" conditionals="64" coveredconditionals="57" methods="41" coveredmethods="35" elements="186" coveredelements="164" complexity="0" loc="81" ncloc="81" packages="4" files="8" classes="8">
       <package name="rn-clock-angle">
         <metrics statements="34" coveredstatements="27" conditionals="18" coveredconditionals="17" methods="23" coveredmethods="18"/>

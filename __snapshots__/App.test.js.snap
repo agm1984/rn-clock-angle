@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Instance Functions renderHour() matches the snapshot 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Object {
+      "padding": 4,
+    }
+  }
+  testID="currentHourDisplay"
+>
+  12
+</Text>
+`;
+
+exports[`App Instance Functions renderHourPicker() matches the snapshot 1`] = `
+<Picker
+  enabled={true}
+  mode="dropdown"
+  onValueChange={[Function]}
+  selectedValue={0}
+  style={
+    Object {
+      "borderColor": "#ccc",
+      "borderWidth": 2,
+      "height": 40,
+      "width": 60,
+    }
+  }
+  testID="hourPicker"
+>
+  <PickerItem
+    label="1"
+    value={1}
+  />
+  <PickerItem
+    label="2"
+    value={2}
+  />
+  <PickerItem
+    label="3"
+    value={3}
+  />
+  <PickerItem
+    label="4"
+    value={4}
+  />
+  <PickerItem
+    label="5"
+    value={5}
+  />
+  <PickerItem
+    label="6"
+    value={6}
+  />
+  <PickerItem
+    label="7"
+    value={7}
+  />
+  <PickerItem
+    label="8"
+    value={8}
+  />
+  <PickerItem
+    label="9"
+    value={9}
+  />
+  <PickerItem
+    label="10"
+    value={10}
+  />
+  <PickerItem
+    label="11"
+    value={11}
+  />
+  <PickerItem
+    label="12"
+    value={12}
+  />
+</Picker>
+`;
+
+exports[`App Instance Functions renderMinute() matches the snapshot 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Object {
+      "padding": 4,
+    }
+  }
+  testID="currentMinuteDisplay"
+>
+  00
+</Text>
+`;
+
+exports[`App Instance Functions renderMinutePicker() matches the snapshot 1`] = `
+<Picker
+  enabled={true}
+  mode="dropdown"
+  onValueChange={[Function]}
+  selectedValue="00"
+  style={
+    Object {
+      "borderColor": "#ccc",
+      "borderWidth": 2,
+      "height": 40,
+      "width": 60,
+    }
+  }
+  testID="minutePicker"
+>
+  <PickerItem
+    label="00"
+    value="00"
+  />
+  <PickerItem
+    label="01"
+    value="01"
+  />
+  <PickerItem
+    label="02"
+    value="02"
+  />
+  <PickerItem
+    label="03"
+    value="03"
+  />
+  <PickerItem
+    label="04"
+    value="04"
+  />
+  <PickerItem
+    label="05"
+    value="05"
+  />
+  <PickerItem
+    label="06"
+    value="06"
+  />
+  <PickerItem
+    label="07"
+    value="07"
+  />
+  <PickerItem
+    label="08"
+    value="08"
+  />
+  <PickerItem
+    label="09"
+    value="09"
+  />
+  <PickerItem
+    label="10"
+    value="10"
+  />
+  <PickerItem
+    label="11"
+    value="11"
+  />
+  <PickerItem
+    label="12"
+    value="12"
+  />
+  <PickerItem
+    label="13"
+    value="13"
+  />
+  <PickerItem
+    label="14"
+    value="14"
+  />
+  <PickerItem
+    label="15"
+    value="15"
+  />
+  <PickerItem
+    label="16"
+    value="16"
+  />
+  <PickerItem
+    label="17"
+    value="17"
+  />
+  <PickerItem
+    label="18"
+    value="18"
+  />
+  <PickerItem
+    label="19"
+    value="19"
+  />
+  <PickerItem
+    label="20"
+    value="20"
+  />
+  <PickerItem
+    label="21"
+    value="21"
+  />
+  <PickerItem
+    label="22"
+    value="22"
+  />
+  <PickerItem
+    label="23"
+    value="23"
+  />
+  <PickerItem
+    label="24"
+    value="24"
+  />
+  <PickerItem
+    label="25"
+    value="25"
+  />
+  <PickerItem
+    label="26"
+    value="26"
+  />
+  <PickerItem
+    label="27"
+    value="27"
+  />
+  <PickerItem
+    label="28"
+    value="28"
+  />
+  <PickerItem
+    label="29"
+    value="29"
+  />
+  <PickerItem
+    label="30"
+    value="30"
+  />
+  <PickerItem
+    label="31"
+    value="31"
+  />
+  <PickerItem
+    label="32"
+    value="32"
+  />
+  <PickerItem
+    label="33"
+    value="33"
+  />
+  <PickerItem
+    label="34"
+    value="34"
+  />
+  <PickerItem
+    label="35"
+    value="35"
+  />
+  <PickerItem
+    label="36"
+    value="36"
+  />
+  <PickerItem
+    label="37"
+    value="37"
+  />
+  <PickerItem
+    label="38"
+    value="38"
+  />
+  <PickerItem
+    label="39"
+    value="39"
+  />
+  <PickerItem
+    label="40"
+    value="40"
+  />
+  <PickerItem
+    label="41"
+    value="41"
+  />
+  <PickerItem
+    label="42"
+    value="42"
+  />
+  <PickerItem
+    label="43"
+    value="43"
+  />
+  <PickerItem
+    label="44"
+    value="44"
+  />
+  <PickerItem
+    label="45"
+    value="45"
+  />
+  <PickerItem
+    label="46"
+    value="46"
+  />
+  <PickerItem
+    label="47"
+    value="47"
+  />
+  <PickerItem
+    label="48"
+    value="48"
+  />
+  <PickerItem
+    label="49"
+    value="49"
+  />
+  <PickerItem
+    label="50"
+    value="50"
+  />
+  <PickerItem
+    label="51"
+    value="51"
+  />
+  <PickerItem
+    label="52"
+    value="52"
+  />
+  <PickerItem
+    label="53"
+    value="53"
+  />
+  <PickerItem
+    label="54"
+    value="54"
+  />
+  <PickerItem
+    label="55"
+    value="55"
+  />
+  <PickerItem
+    label="56"
+    value="56"
+  />
+  <PickerItem
+    label="57"
+    value="57"
+  />
+  <PickerItem
+    label="58"
+    value="58"
+  />
+  <PickerItem
+    label="59"
+    value="59"
+  />
+</Picker>
+`;

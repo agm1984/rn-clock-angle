@@ -1,6 +1,6 @@
 {
   "name": "rn-clock-angle",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "babel-eslint": "^8.2.3",

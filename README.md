@@ -1,5 +1,9 @@
 # INANGLES Clock Angler
 
+[![clock_Angle_Example.png](https://s9.postimg.cc/vfgyaz0sv/clock_Angle_Example.png)](https://postimg.cc/image/44vn31xvv/)
+
+> This React Native application allows you to view the angles between the hour and minute hands on a clock. It was built using test-driven development, and it serves minimal utility other than acting as a base for forensic analysis.
+
 ## Install
 ``` bash
 $ git clone https://github.com/agm1984/rn-clock-angle.git

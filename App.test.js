@@ -107,6 +107,10 @@ describe('App', () => {
         app.query('#toggleAfternoon').simulate('valueChange', false)
         expect(app.state().isAfternoon).toEqual(true)
       })
+      it('was mocked out properly', () => {
+        jest.mock('Picker', () => 'Picker')
+        expect(app.query('Picker')).toBeTruth({})
+      })
     })
   })
 })
